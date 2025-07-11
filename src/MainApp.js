@@ -21,7 +21,7 @@ const [kycInput, setKycInput] = useState('');
 const agentName = localStorage.getItem('role') || 'Agent';
 
 const updateStatus = (id, newStatus) => {
-  axios.post(`https://crm-backend-1-2mb5.onrender.com/contacts/${id}/update`, { result: newStatus })
+  axios.post(`https://crm-backend20.onrender.com/contacts/${id}/update`, { result: newStatus })
     .then(() => {
       setContacts(prev => prev.map(c => c._id === id ? { ...c, result: newStatus } : c));
     })
@@ -29,9 +29,9 @@ const updateStatus = (id, newStatus) => {
 };
 
 useEffect(() => {
-  axios.get('https://crm-backend-1-2mb5.onrender.com')
+  axios.get('https://crm-backend20.onrender.com/contacts')
     .then(res => setContacts(res.data))
-    .catch(() => alert('Cannot reach backend'));
+    .catch(() => alert('Cannot reach backends'));
 }, []);
 const filteredContacts = contacts.filter(c => {
   const statusMatch =
@@ -281,7 +281,7 @@ const filteredContacts = contacts.filter(c => {
         <button
           onClick={() => {
             const agent = localStorage.getItem('role') || 'Agent';
-            axios.post(`https://crm-backend-1-2mb5.onrender.com/contacts/${currentContact._id}/update`, { kyc: `${kycInput} (by ${agent})` })
+            axios.post(`https://crm-backend20.onrender.com/contacts/${currentContact._id}/update`, { kyc: `${kycInput} (by ${agent})` })
               .then(() => {
                 setContacts(prev => prev.map(c => c._id === currentContact._id ? { ...c, kyc: `${kycInput} (by ${agent})` } : c));
                 setShowKYC(false);
