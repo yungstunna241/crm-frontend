@@ -31,7 +31,10 @@ const updateStatus = (id, newStatus) => {
 useEffect(() => {
   axios.get('https://crm-backend20.onrender.com/contacts')
     .then(res => setContacts(res.data))
-    .catch(() => alert('Cannot reach backends'));
+    .catch(err => {
+      console.error('Axios error:', err);
+      alert('Cannot reach backend');
+    });
 }, []);
 const filteredContacts = contacts.filter(c => {
   const statusMatch =
